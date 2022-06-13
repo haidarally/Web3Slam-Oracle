@@ -2,6 +2,7 @@
 var GetDataHelper = require('../helper/GetData');
 var AddDataHelper = require('../helper/AddData');
 var md5 = require('md5');
+
 var { calculateLimitAndOffset, paginate } = require('paginate-info');
 
 exports.addData = async function (req, res) {
