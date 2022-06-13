@@ -46,7 +46,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"walletAddress\":\"\",\n    \"currentPage\": 2,\n    \"pageSize\": 5\n}",
+					"raw": "{\n    \"walletAddress\":\"\",\n    \"currentPage\": 1,\n    \"pageSize\": 3\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -74,7 +74,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"walletAddress\":\"APItest4\",\n    \"url\": \"pampers.com\",\n    \"data\": \"Clcike fav rnr 2\"\n}",
+					"raw": "{\n    \"walletAddress\":\"APItest5\",\n    \"url\": \"pampers.com\",\n    \"data\": \"Clcike fav rnr 2\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -88,6 +88,99 @@
 						"localhost"
 					],
 					"port": "3000",
+					"path": [
+						"data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetData Prod",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"walletAddress\":\"Test1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oceana-lab-n58z7.ondigitalocean.app/data",
+					"protocol": "https",
+					"host": [
+						"oceana-lab-n58z7",
+						"ondigitalocean",
+						"app"
+					],
+					"path": [
+						"data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Data Prod",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"walletAddress\":\"\",\n    \"currentPage\": 1,\n    \"pageSize\": 3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oceana-lab-n58z7.ondigitalocean.app/data",
+					"protocol": "https",
+					"host": [
+						"oceana-lab-n58z7",
+						"ondigitalocean",
+						"app"
+					],
+					"path": [
+						"data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddData Prod",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"walletAddress\":\"APItest5\",\n    \"url\": \"pampers.com\",\n    \"data\": \"Clcike fav rnr 2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oceana-lab-n58z7.ondigitalocean.app/data",
+					"protocol": "https",
+					"host": [
+						"oceana-lab-n58z7",
+						"ondigitalocean",
+						"app"
+					],
 					"path": [
 						"data"
 					]
