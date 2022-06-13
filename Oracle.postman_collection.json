@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9176d795-44f7-41cc-afbe-6d970e1b3939",
+		"_postman_id": "a26698a0-3f01-417b-a775-600ba6e7a68d",
 		"name": "Oracle",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"walletAddress\":\"\"\n}",
+					"raw": "{\n    \"walletAddress\":\"Test1\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -46,7 +46,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"walletAddress\":\"b22d24bc6509ef62a11082e612bb50b8\"\n}",
+					"raw": "{\n    \"walletAddress\":\"\",\n    \"currentPage\": 2,\n    \"pageSize\": 5\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -74,7 +74,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"walletAddress\":\"APItest3\",\n    \"date\": \"\",\n    \"data\": \"Clcike fav rnr 2\"\n}",
+					"raw": "{\n    \"walletAddress\":\"APItest4\",\n    \"url\": \"pampers.com\",\n    \"data\": \"Clcike fav rnr 2\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
