@@ -1,12 +1,12 @@
-"use strict";
-var GetDataHelper = require("../helper/GetData");
-var AddDataHelper = require("../helper/AddData");
-var md5 = require("md5");
+'use strict';
+var GetDataHelper = require('../helper/GetData');
+var AddDataHelper = require('../helper/AddData');
+var md5 = require('md5');
 
 exports.addData = async function (req, res) {
   const body = req.body;
   let user = body.walletAddress;
-  const initDate = body.date;
+  const url = body.url;
   const data = body.data;
 
   // Hashing user wallet
@@ -20,7 +20,8 @@ exports.addData = async function (req, res) {
   let resBody = await AddDataHelper.addUserData(
     user,
     BigInt(birthDateInUnixTimestamp),
-    data
+    data,
+    url
   );
 
   res.json(resBody);
@@ -30,8 +31,8 @@ exports.getData = async function (req, res) {
   const body = req.body;
   const user = body.walletAddress;
 
-  let resBody = "";
-  if (user === "") {
+  let resBody = '';
+  if (user === '') {
     resBody = await GetDataHelper.getAllData();
   } else {
     resBody = await GetDataHelper.getUserData(user);
