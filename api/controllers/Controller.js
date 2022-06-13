@@ -2,6 +2,7 @@
 var GetDataHelper = require('../helper/GetData');
 var AddDataHelper = require('../helper/AddData');
 var md5 = require('md5');
+var { calculateLimitAndOffset, paginate } = require('paginate-info');
 
 exports.addData = async function (req, res) {
   const body = req.body;
@@ -30,10 +31,21 @@ exports.addData = async function (req, res) {
 exports.getData = async function (req, res) {
   const body = req.body;
   const user = body.walletAddress;
+  const currentPage = body.currentPage;
+  const pageSize = body.pageSize;
 
   let resBody = '';
-  if (user === '') {
-    resBody = await GetDataHelper.getAllData();
+  if (user === '' && currentPage != null && pageSize != null) {
+    var data = await GetDataHelper.getAllData();
+    const { limit, offset } = calculateLimitAndOffset(currentPage, pageSize);
+    const count = data.length;
+    const paginatedData = data.slice(offset, offset + limit);
+    const paginationInfo = paginate(currentPage, count, paginatedData);
+
+    resBody = {
+      result: paginatedData,
+      meta: paginationInfo,
+    };
   } else {
     resBody = await GetDataHelper.getUserData(user);
   }
