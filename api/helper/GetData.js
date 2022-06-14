@@ -2,6 +2,7 @@ var dotenv = require('dotenv');
 var Web3 = require('web3');
 var HDWalletProvider = require('@truffle/hdwallet-provider');
 var dataContract = require('./DataContract.json');
+var collectionContract = require('./CollectionContract.json');
 const md5 = require('md5');
 
 const MNEMONICS = `also alcohol metal point whip emerge science elevator recycle can bundle diesel`;
@@ -18,6 +19,11 @@ const web3ETH = new Web3(ETHprovider);
 const DataContractInstance = new web3ETH.eth.Contract(
   dataContract.abi,
   '0x5D58d9CDb834bA9C92B533657C1Bd97C8162788d'
+);
+
+const CollectionInstance = new web3ETH.eth.Contract(
+  collectionContract.abi,
+  '0x2d8eF71FB1DDb98f9f713F5FFC6b838D293cbe4d'
 );
 
 exports.getUserData = async (userWalletId) => {
@@ -76,4 +82,35 @@ exports.getAllData = async () => {
   } catch (error) {
     return error;
   }
+};
+
+exports.getUserNFTs = async (walletAddress) => {
+  let arrayLength = 48; //TODO: remove hardcoding
+  try {
+    let balanceArray = new Array();
+    for (let i = 0; i < arrayLength; i++) {
+      let hasNFT = false;
+      const balance = await CollectionInstance.methods
+        .balanceOf(walletAddress, i)
+        .call();
+
+      const metadata = await CollectionInstance.methods.uri(i).call();
+      console.log(metadata);
+
+      if (balance > 0) {
+        hasNFT = true;
+      }
+
+      balanceArray.push({
+        id: i,
+        balance: balance,
+        hasNFT: hasNFT,
+        metadata: metadata,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return balanceArray;
 };
