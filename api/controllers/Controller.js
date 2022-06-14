@@ -10,21 +10,22 @@ exports.addData = async function (req, res) {
   let user = body.walletAddress;
   const url = body.url;
   const data = body.data;
-
+  let resBody = {};
   // Hashing user wallet
-  user = md5(user);
+  if (user != null && user != undefined) {
+    user = md5(user);
+    //Formating date
+    let date = new Date().getTime();
+    let birthDateInUnixTimestamp = date / 1000;
+    birthDateInUnixTimestamp = ~~birthDateInUnixTimestamp;
 
-  //Formating date
-  let date = new Date().getTime();
-  let birthDateInUnixTimestamp = date / 1000;
-  birthDateInUnixTimestamp = ~~birthDateInUnixTimestamp;
-
-  let resBody = await AddDataHelper.addUserData(
-    user,
-    BigInt(birthDateInUnixTimestamp),
-    data,
-    url
-  );
+    resBody = await AddDataHelper.addUserData(
+      user,
+      BigInt(birthDateInUnixTimestamp),
+      data,
+      url
+    );
+  }
 
   res.json(resBody);
 };
