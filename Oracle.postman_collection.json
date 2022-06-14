@@ -15,7 +15,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"walletAddress\":\"Test1\"\n}",
+					"raw": "{\n    \"walletAddress\":\"APItest5\",\n    \"isHashed\": false\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -105,7 +105,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"walletAddress\":\"Test1\"\n}",
+					"raw": "{\n    \"walletAddress\":\"0x40C44175E9a95775E2A5Cb2E3ff0D628b04A4A04\",\n    \"isHashed\": false\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -137,7 +137,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"walletAddress\":\"\",\n    \"currentPage\": 1,\n    \"pageSize\": 3\n}",
+					"raw": "{\n    \"walletAddress\":\"\",\n    \"currentPage\": 3,\n    \"pageSize\": 3\n}",
 					"options": {
 						"raw": {
 							"language": "json"
