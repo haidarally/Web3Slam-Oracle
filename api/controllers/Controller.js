@@ -14,6 +14,9 @@ exports.addData = async function (req, res) {
   const url = body.url;
   const data = body.data;
   let resBody = {};
+
+  console.log(`Adding Date: ${stringify(req)}`);
+
   // Hashing user wallet
   try {
     if (user != null && user != undefined && user != '') {
