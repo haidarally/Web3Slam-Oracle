@@ -86,30 +86,26 @@ exports.getAllData = async () => {
 
 exports.getUserNFTs = async (walletAddress) => {
   let arrayLength = 48; //TODO: remove hardcoding
-  try {
-    let balanceArray = new Array();
-    for (let i = 0; i < arrayLength; i++) {
-      let hasNFT = false;
-      const balance = await CollectionInstance.methods
-        .balanceOf(walletAddress, i)
-        .call();
+  let balanceArray = new Array();
+  for (let i = 0; i < arrayLength; i++) {
+    let hasNFT = false;
+    const balance = await CollectionInstance.methods
+      .balanceOf(walletAddress, i)
+      .call();
 
-      const metadata = await CollectionInstance.methods.uri(i).call();
-      console.log(metadata);
+    const metadata = await CollectionInstance.methods.uri(i).call();
+    console.log(metadata);
 
-      if (balance > 0) {
-        hasNFT = true;
-      }
-
-      balanceArray.push({
-        id: i,
-        balance: balance,
-        hasNFT: hasNFT,
-        metadata: metadata,
-      });
+    if (balance > 0) {
+      hasNFT = true;
     }
-  } catch (error) {
-    console.log(error);
+
+    balanceArray.push({
+      id: i,
+      balance: balance,
+      hasNFT: hasNFT,
+      metadata: metadata,
+    });
   }
 
   return balanceArray;
