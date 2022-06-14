@@ -10,6 +10,7 @@ const ETHprovider = new HDWalletProvider({
   providerOrUrl:
     'https://rinkeby.infura.io/v3/YOUR_INFURA_PROJECT_ID',
   addressIndex: 0,
+  shareNonce: true,
 });
 
 const web3ETH = new Web3(ETHprovider);
@@ -32,6 +33,8 @@ exports.addUserData = async (wallet, date, data, url) => {
     };
     return response;
   } catch (error) {
+    if ((error.message = 'nonce too low')) {
+    }
     return error;
   }
 };
