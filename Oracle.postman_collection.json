@@ -7,11 +7,8 @@
 	"item": [
 		{
 			"name": "GetData",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -23,14 +20,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/data",
+					"raw": "http://localhost:3000/getdata",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"data"
+						"getdata"
 					]
 				}
 			},
@@ -38,11 +35,8 @@
 		},
 		{
 			"name": "Get All Data",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -54,14 +48,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/data",
+					"raw": "http://localhost:3000/getdata",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"data"
+						"getdata"
 					]
 				}
 			},
@@ -97,12 +91,18 @@
 		},
 		{
 			"name": "GetData Prod",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
-				"header": [],
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "origin",
+						"value": "*",
+						"type": "default"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"walletAddress\":\"0x40C44175E9a95775E2A5Cb2E3ff0D628b04A4A04\",\n    \"isHashed\": false\n}",
@@ -113,7 +113,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://oceana-lab-n58z7.ondigitalocean.app/data",
+					"raw": "https://oceana-lab-n58z7.ondigitalocean.app/getdata",
 					"protocol": "https",
 					"host": [
 						"oceana-lab-n58z7",
@@ -121,7 +121,7 @@
 						"app"
 					],
 					"path": [
-						"data"
+						"getdata"
 					]
 				}
 			},
@@ -129,15 +129,12 @@
 		},
 		{
 			"name": "Get All Data Prod",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"walletAddress\":\"\",\n    \"currentPage\": 3,\n    \"pageSize\": 3\n}",
+					"raw": "{\n    \"walletAddress\":\"\",\n    \"currentPage\": 2,\n    \"pageSize\": 3\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -145,7 +142,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://oceana-lab-n58z7.ondigitalocean.app/data",
+					"raw": "https://oceana-lab-n58z7.ondigitalocean.app/getdata",
 					"protocol": "https",
 					"host": [
 						"oceana-lab-n58z7",
@@ -153,7 +150,7 @@
 						"app"
 					],
 					"path": [
-						"data"
+						"getdata"
 					]
 				}
 			},

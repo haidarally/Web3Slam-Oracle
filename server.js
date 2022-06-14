@@ -6,7 +6,17 @@ var cors = require('cors');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(cors());
+app.use(
+  cors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders:
+      'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,X-Access-Token,XKey,Authorization',
+    credentials: true,
+    preflightContinue: true,
+    optionsSuccessStatus: 204,
+  })
+);
 
 var routes = require('./api/routes/Routes'); //importing route
 routes(app); //register the route
