@@ -12,19 +12,28 @@ exports.addData = async function (req, res) {
   const data = body.data;
   let resBody = {};
   // Hashing user wallet
-  if (user != null && user != undefined) {
-    user = md5(user);
-    //Formating date
-    let date = new Date().getTime();
-    let birthDateInUnixTimestamp = date / 1000;
-    birthDateInUnixTimestamp = ~~birthDateInUnixTimestamp;
+  try {
+    if (user != null && user != undefined && user != '') {
+      user = md5(user);
+      console.log(`user:${user}`);
+      //Formating date
+      let date = new Date().getTime();
+      let birthDateInUnixTimestamp = date / 1000;
+      birthDateInUnixTimestamp = ~~birthDateInUnixTimestamp;
 
-    resBody = await AddDataHelper.addUserData(
-      user,
-      BigInt(birthDateInUnixTimestamp),
-      data,
-      url
-    );
+      resBody = await AddDataHelper.addUserData(
+        user,
+        BigInt(birthDateInUnixTimestamp),
+        data,
+        url
+      );
+    } else {
+      resBody = {
+        result: `User undefined`,
+      };
+    }
+  } catch (error) {
+    resBody = { error };
   }
 
   res.json(resBody);
@@ -37,19 +46,23 @@ exports.getData = async function (req, res) {
   const pageSize = body.pageSize;
 
   let resBody = '';
-  if (user === '' && currentPage != null && pageSize != null) {
-    var data = await GetDataHelper.getAllData();
-    const { limit, offset } = calculateLimitAndOffset(currentPage, pageSize);
-    const count = data.length;
-    const paginatedData = data.slice(offset, offset + limit);
-    const paginationInfo = paginate(currentPage, count, paginatedData);
+  try {
+    if (user === '' && currentPage != null && pageSize != null) {
+      var data = await GetDataHelper.getAllData();
+      const { limit, offset } = calculateLimitAndOffset(currentPage, pageSize);
+      const count = data.length;
+      const paginatedData = data.slice(offset, offset + limit);
+      const paginationInfo = paginate(currentPage, count, paginatedData);
 
-    resBody = {
-      result: paginatedData,
-      meta: paginationInfo,
-    };
-  } else {
-    resBody = await GetDataHelper.getUserData(user);
+      resBody = {
+        result: paginatedData,
+        meta: paginationInfo,
+      };
+    } else {
+      resBody = await GetDataHelper.getUserData(user);
+    }
+  } catch (error) {
+    resBody = { error };
   }
 
   res.json(resBody);
