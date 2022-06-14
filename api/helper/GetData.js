@@ -2,6 +2,7 @@ var dotenv = require('dotenv');
 var Web3 = require('web3');
 var HDWalletProvider = require('@truffle/hdwallet-provider');
 var dataContract = require('./DataContract.json');
+const md5 = require('md5');
 
 const MNEMONICS = `also alcohol metal point whip emerge science elevator recycle can bundle diesel`;
 
@@ -20,6 +21,23 @@ const DataContractInstance = new web3ETH.eth.Contract(
 );
 
 exports.getUserData = async (userWalletId) => {
+  try {
+    console.log(`Getting User Data for ${userWalletId}`);
+    userWalletId = md5(userWalletId);
+    const res = await DataContractInstance.methods.GetData(userWalletId).call();
+    console.log(res);
+    //console.log(ETHprovider.getAddress(0));
+    const user = {
+      user: res,
+    };
+    return user;
+  } catch (error) {
+    return error;
+  }
+};
+
+exports.getHashedData = async (userWalletId) => {
+  console.log(`Getting Hashed Data for ${userWalletId}`);
   try {
     const res = await DataContractInstance.methods.GetData(userWalletId).call();
     console.log(res);

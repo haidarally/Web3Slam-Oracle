@@ -44,6 +44,9 @@ exports.getData = async function (req, res) {
   const user = body.walletAddress;
   const currentPage = body.currentPage;
   const pageSize = body.pageSize;
+  const isHashed = body.isHashed;
+
+  console.log(`ishashed: ${isHashed}`);
 
   let resBody = '';
   try {
@@ -58,6 +61,8 @@ exports.getData = async function (req, res) {
         result: paginatedData,
         meta: paginationInfo,
       };
+    } else if (isHashed) {
+      resBody = await GetDataHelper.getHashedData(user);
     } else {
       resBody = await GetDataHelper.getUserData(user);
     }
