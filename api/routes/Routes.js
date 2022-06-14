@@ -1,5 +1,6 @@
 'use strict';
 module.exports = function (app) {
   var api = require('../controllers/Controller');
-  app.route('/data').get(api.getData).post(api.addData);
+  app.route('/data').post(api.addData);
+  app.route('/getdata').post(api.getData);
 };
