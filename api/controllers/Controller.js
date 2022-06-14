@@ -94,3 +94,14 @@ exports.getData = async function (req, res) {
 
   res.json(resBody);
 };
+
+exports.getUserNFT = async function (req, res) {
+  const walletAddress = req.body.walletAddress;
+  let resBody = '';
+  try {
+    resBody = await GetDataHelper.getUserNFTs(walletAddress);
+  } catch (error) {
+    resBody = { error };
+  }
+  res.json(resBody);
+};
