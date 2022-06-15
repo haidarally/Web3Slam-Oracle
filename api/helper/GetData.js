@@ -4,6 +4,7 @@ var HDWalletProvider = require('@truffle/hdwallet-provider');
 var dataContract = require('./DataContract.json');
 var collectionContract = require('./CollectionContract.json');
 const md5 = require('md5');
+const axios = require('axios').default;
 
 const MNEMONICS = `also alcohol metal point whip emerge science elevator recycle can bundle diesel`;
 
@@ -93,18 +94,31 @@ exports.getUserNFTs = async (walletAddress) => {
       .balanceOf(walletAddress, i)
       .call();
 
-    const metadata = await CollectionInstance.methods.uri(i).call();
-    console.log(metadata);
+    let ipfsUri = '';
+    let metadata = {
+      data: {
+        result: 'User does not have this NFT',
+        value: 0,
+      },
+    }; // await fetch(ipfsUri);
 
     if (balance > 0) {
+      ipfsUri = await CollectionInstance.methods.uri(i).call();
+      //console.log(ipfsUriRaw);
+      //let ipfsUri = new String();
+      ipfsUri = ipfsUri.replace(`ipfs://`, `https://ipfs.io/ipfs/`);
+      console.log(ipfsUri);
+
       hasNFT = true;
+      metadata = await axios.get(ipfsUri); //await fetch(ipfsUri);
+      console.log(metadata);
     }
 
     balanceArray.push({
       id: i,
       balance: balance,
       hasNFT: hasNFT,
-      metadata: metadata,
+      metadata: metadata.data,
     });
   }
 
