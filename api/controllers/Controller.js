@@ -5,6 +5,7 @@ var md5 = require('md5');
 const { stringify } = require('flatted');
 const NodeCache = require('node-cache');
 const myCache = new NodeCache({ stdTTL: 100, checkperiod: 300 });
+const myCacheNFT = new NodeCache({ stdTTL: 100, checkperiod: 3000 });
 
 var { calculateLimitAndOffset, paginate } = require('paginate-info');
 
@@ -97,11 +98,21 @@ exports.getData = async function (req, res) {
 
 exports.getUserNFT = async function (req, res) {
   const walletAddress = req.body.walletAddress;
+  var key = md5(stringify(req.body));
+  console.log(`Key: ${key}`);
+
   let resBody = '';
-  try {
-    resBody = await GetDataHelper.getUserNFTs(walletAddress);
-  } catch (error) {
-    resBody = { error };
+
+  if (myCacheNFT.has(key)) {
+    resBody = myCacheNFT.get(key);
+  } else {
+    try {
+      resBody = await GetDataHelper.getUserNFTs(walletAddress);
+      myCacheNFT.set(key, resBody);
+    } catch (error) {
+      resBody = { error: stringify(error) };
+    }
   }
+
   res.json(resBody);
 };
