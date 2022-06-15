@@ -117,25 +117,25 @@ exports.getUserNFT = async function (req, res) {
   res.json(resBody);
 };
 
-exports.getLoop = async function (req, res) {
-  async function sleep(msec) {
-    return new Promise((resolve) => setTimeout(resolve, msec));
-  }
-  async function testSleep() {
-    console.log('Waiting for 100 second...');
-    await sleep(1000 * 100);
-    console.log('Waiting done.'); // Called 1 second after the first console.log
-  }
-  let resBody = '';
-  let i = 1;
-  if ((req.body.value = 1)) {
-    try {
-      while (i > 0) {
-        await testSleep();
-        i++;
-      }
-      resBody = 'never getting here';
-    } catch (error) {}
-  }
-  res.json(resBody);
-};
+// exports.getLoop = async function (req, res) {
+//   async function sleep(msec) {
+//     return new Promise((resolve) => setTimeout(resolve, msec));
+//   }
+//   async function testSleep() {
+//     console.log('Waiting for 100 second...');
+//     await sleep(1000 * 100);
+//     console.log('Waiting done.'); // Called 1 second after the first console.log
+//   }
+//   let resBody = '';
+//   let i = 1;
+//   if ((req.body.value = 1)) {
+//     try {
+//       while (i > 0) {
+//         await testSleep();
+//         i++;
+//       }
+//       resBody = 'never getting here';
+//     } catch (error) {}
+//   }
+//   res.json(resBody);
+// };
