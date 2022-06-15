@@ -4,8 +4,8 @@ var AddDataHelper = require('../helper/AddData');
 var md5 = require('md5');
 const { stringify } = require('flatted');
 const NodeCache = require('node-cache');
-const myCache = new NodeCache({ stdTTL: 100, checkperiod: 300 });
-const myCacheNFT = new NodeCache({ stdTTL: 100, checkperiod: 3000 });
+const myCache = new NodeCache({ stdTTL: 60 * 10, checkperiod: 60 * 5 });
+const myCacheNFT = new NodeCache({ stdTTL: 60 * 30, checkperiod: 60 * 15 });
 
 var { calculateLimitAndOffset, paginate } = require('paginate-info');
 
