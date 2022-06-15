@@ -86,41 +86,45 @@ exports.getAllData = async () => {
 };
 
 exports.getUserNFTs = async (walletAddress) => {
-  let arrayLength = 48; //TODO: remove hardcoding
-  let balanceArray = new Array();
-  for (let i = 0; i < arrayLength; i++) {
-    let hasNFT = false;
-    const balance = await CollectionInstance.methods
-      .balanceOf(walletAddress, i)
-      .call();
+  try {
+    let arrayLength = 48; //TODO: remove hardcoding
+    let balanceArray = new Array();
+    for (let i = 0; i < arrayLength; i++) {
+      let hasNFT = false;
+      const balance = await CollectionInstance.methods
+        .balanceOf(walletAddress, i)
+        .call();
 
-    let ipfsUri = '';
-    let metadata = {
-      data: {
-        result: 'User does not have this NFT',
-        value: 0,
-      },
-    }; // await fetch(ipfsUri);
+      let ipfsUri = '';
+      let metadata = {
+        data: {
+          result: 'User does not have this NFT',
+          value: 0,
+        },
+      }; // await fetch(ipfsUri);
 
-    if (balance > 0) {
-      ipfsUri = await CollectionInstance.methods.uri(i).call();
-      //console.log(ipfsUriRaw);
-      //let ipfsUri = new String();
-      ipfsUri = ipfsUri.replace(`ipfs://`, `https://ipfs.io/ipfs/`);
-      console.log(ipfsUri);
+      if (balance > 0) {
+        ipfsUri = await CollectionInstance.methods.uri(i).call();
+        //console.log(ipfsUriRaw);
+        //let ipfsUri = new String();
+        ipfsUri = ipfsUri.replace(`ipfs://`, `https://ipfs.io/ipfs/`);
+        console.log(ipfsUri);
 
-      hasNFT = true;
-      metadata = await axios.get(ipfsUri); //await fetch(ipfsUri);
-      console.log(metadata);
+        hasNFT = true;
+        metadata = await axios.get(ipfsUri); //await fetch(ipfsUri);
+        console.log(metadata);
+      }
+
+      balanceArray.push({
+        id: i,
+        balance: balance,
+        hasNFT: hasNFT,
+        metadata: metadata.data,
+      });
     }
 
-    balanceArray.push({
-      id: i,
-      balance: balance,
-      hasNFT: hasNFT,
-      metadata: metadata.data,
-    });
+    return balanceArray;
+  } catch (error) {
+    return error;
   }
-
-  return balanceArray;
 };
