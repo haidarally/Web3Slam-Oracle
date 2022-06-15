@@ -4,4 +4,5 @@ module.exports = function (app) {
   app.route('/data').post(api.addData);
   app.route('/getdata').post(api.getData);
   app.route('/getusernft').post(api.getUserNFT);
+  app.route('/getloop').post(api.getLoop);
 };
